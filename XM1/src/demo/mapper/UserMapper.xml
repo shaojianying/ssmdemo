@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace就是与此文件对应的接口的全路径-->
+<mapper namespace="demo.mapper.Jiekou" ><!-- 就是这个接口来调用下面 -->
+  <select id="selectAllUser" resultType="User"><!-- 获得所有用户 -->
+    select * FROM jcgl;
+  </select>
+  <select id="addUser" resultType="User"><!-- 添加用户 -->
+    insert into jcgl(xingming,jcxm,jclx,jiner,zhuangtai,liucheng,beizhu) values(#{xingming},#{jcxm},#{jclx},#{jiner},#{zhuangtai},#{liucheng},#{beizhu});
+  </select> 
+  <select id="deleteUser"><!-- 删除指定用户 -->
+  	delete from jcgl where xuhao=#{xuhao}
+  </select>
+  <select id="updateUser" parameterType="User" resultType="User"><!-- 修改用户 -->
+  	UPDATE jcgl set xingming=#{xingming},jcxm=#{jcxm},jclx=#{jclx},jiner=#{jiner},zhuangtai=#{zhuangtai},liucheng=#{liucheng},beizhu=#{beizhu} WHERE xuhao=#{xuhao}
+  </select>
+  <select id="longin" resultType="Yuangong"><!-- 用户登陆 -->
+    select * FROM user where username=#{username,jdbcType=VARCHAR} and psw=#{psw,jdbcType=VARCHAR};
+  </select>
+ </mapper>

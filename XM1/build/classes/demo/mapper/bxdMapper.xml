@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace就是与此文件对应的接口的全路径-->
+<mapper namespace="demo.mapper.bxdDao" ><!-- 就是这个接口来调用下面 -->
+  <select id="addlbxd" resultType="bxd"><!-- 新增报销单 -->
+    insert into reimbursement (bxid,bxname,bxshiyou,bxjine,bxshijian,bxzhuangtai,jingliyijian,zongjingliyijian,caiwuyijian)
+    values(#{bxid},#{bxname},#{bxshiyou},#{bxjine},#{bxshijian},#{bxzhuangtai},#{jingliyijian},#{zongjingliyijian},#{caiwuyijian})
+  </select>
+  <select id="selectbxd" resultType="bxd"><!-- 查看所有报销单 -->
+  	select *from reimbursement
+  </select>
+   <select id="selectbxdbyzhuangtai" resultType="bxd"><!-- 查看经理需要审批的报销单 -->
+  	select *from reimbursement where bxzhuangtai=1
+  </select>
+  <select id="updatebxdbyid" resultType="bxd"><!-- 经理根据报销单id修改指定的报销单 -->
+  	update reimbursement set bxzhuangtai=#{bxzhuangtai},jingliyijian=#{jingliyijian} where bxid=#{bxid}
+  </select>
+  <select id="selectbxdbybxid" resultType="bxd" parameterType="java.lang.Integer"><!-- 查看经理需要审批操作的单个报销单 -->
+  	select *from reimbursement where bxid=#{bxid jdbcType=INTEGER}
+  </select>
+ </mapper>
